@@ -20,24 +20,31 @@ function Square(props) {
         );
     }
 
+    createsquares(qtd){
+      var squaresArr = [];
+      for(let i = 0; i<qtd;i++){
+        squaresArr.push(this.renderSquare(i))
+      }
+      return squaresArr;
+    }
+
+    createBoard(nd, qtd){
+      var divs = [];
+      var squaresArr = this.createsquares(qtd);
+      for(let i = 0; i<(qtd/nd);i++){
+        divs.push(
+          <div className="board-row">
+            {squaresArr.splice(0,qtd/nd)}
+          </div>
+        )
+      }
+      return divs
+    }
+
     render() {
       return (
         <div>
-          <div className="board-row">
-            {this.renderSquare(0)}
-            {this.renderSquare(1)}
-            {this.renderSquare(2)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(3)}
-            {this.renderSquare(4)}
-            {this.renderSquare(5)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(6)}
-            {this.renderSquare(7)}
-            {this.renderSquare(8)}
-          </div>
+          {this.createBoard(3,9)}
         </div>
       );
     }
